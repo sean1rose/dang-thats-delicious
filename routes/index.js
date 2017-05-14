@@ -15,16 +15,18 @@ const router = express.Router();
 
 // Do work here
 router.get('/', (req, res) => {
-  console.log('root route...');
+  console.log('res.locals - ', JSON.stringify(res.locals));
   const sean = { name: 'Sean', age: 50, cool: true};
   // res.json(sean);
   // res.send('Hey! It works!');
   // res.json(req.query);
+  // res.json(res.locals);
   
   // need a template to render out
   res.render('hello', {
     name: 'sean',
-    dog: req.query.dog
+    dog: req.query.dog,
+    title: 'Learn Node'
   });
 });
 
