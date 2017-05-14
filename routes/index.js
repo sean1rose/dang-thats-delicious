@@ -1,7 +1,9 @@
-// ROUTES!
+// ROUTES FILE! -> tells us the urls that we can hit, then delegate work to controllers...
+  // -> for each route -> factor out callback logic into a dedicated CONTROLLER
 
 const express = require('express');
 const router = express.Router();
+const storeController = require('../controllers/storeController');
 
 // RESPONSE METHODS:
   // 1. send simple string/data
@@ -13,22 +15,8 @@ const router = express.Router();
   // 3. send back/render a template (using pug/jade templating language)
 // res.render()
 
-// Do work here
-router.get('/', (req, res) => {
-  console.log('res.locals - ', JSON.stringify(res.locals));
-  const sean = { name: 'Sean', age: 50, cool: true};
-  // res.json(sean);
-  // res.send('Hey! It works!');
-  // res.json(req.query);
-  // res.json(res.locals);
-  
-  // need a template to render out
-  res.render('hello', {
-    name: 'sean',
-    dog: req.query.dog,
-    title: 'Learn Node'
-  });
-});
+// call controller function, which is imported
+router.get('/', storeController.homePage);
 
 router.get('/reverse/:name', (req,res) => {
   const reverse = [...req.params.name].reverse().join('');
